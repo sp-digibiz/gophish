@@ -33,8 +33,6 @@ docker run cisagov/example:0.2.0
 
     ```yaml
     ---
-    version: "3.7"
-
     services:
       example:
         image: cisagov/example:0.2.0
@@ -74,8 +72,6 @@ environment variables.  See the
 
     ```yaml
     ---
-    version: "3.7"
-
     secrets:
       quote_txt:
         file: quote.txt
