@@ -37,17 +37,17 @@ docker run cisagov/example:0.2.0
 
     services:
       example:
-        image: cisagov/example:0.2.0
-        volumes:
-          - type: bind
-            source: <your_log_dir>
-            target: /var/log
         environment:
           - ECHO_MESSAGE="Hello from docker compose"
+        image: cisagov/example:0.2.0
         ports:
-          - target: 8080
+          - protocol: tcp
             published: 8080
-            protocol: tcp
+            target: 8080
+        volumes:
+          - source: <your_log_dir>
+            target: /var/log
+            type: bind
     ```
 
 1. Start the container and detach:
@@ -82,20 +82,20 @@ environment variables.  See the
 
     services:
       example:
-        image: cisagov/example:0.2.0
-        volumes:
-          - type: bind
-            source: <your_log_dir>
-            target: /var/log
         environment:
           - ECHO_MESSAGE="Hello from docker compose"
+        image: cisagov/example:0.2.0
         ports:
-          - target: 8080
+          - protocol: tcp
             published: 8080
-            protocol: tcp
+            target: 8080
         secrets:
           - source: quote_txt
             target: quote.txt
+        volumes:
+          - source: <your_log_dir>
+            target: /var/log
+            type: bind
     ```
 
 ## Updating your container ##
