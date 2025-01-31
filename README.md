@@ -33,6 +33,8 @@ docker run cisagov/example:0.2.0
 
     ```yaml
     ---
+    name: skeleton-docker
+
     services:
       example:
         image: cisagov/example:0.2.0
@@ -72,6 +74,8 @@ environment variables.  See the
 
     ```yaml
     ---
+    name: skeleton-docker
+
     secrets:
       quote_txt:
         file: quote.txt
