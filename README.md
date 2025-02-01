@@ -29,7 +29,7 @@ docker run cisagov/example:0.2.0
 
 ### Running with Docker Compose ###
 
-1. Create a `docker-compose.yml` file similar to the one below to use [Docker Compose](https://docs.docker.com/compose/).
+1. Create a `compose.yml` file similar to the one below to use [Docker Compose](https://docs.docker.com/compose/).
 
     ```yaml
     ---
@@ -70,7 +70,7 @@ environment variables.  See the
     Better lock it in your pocket.
     ```
 
-1. Then add the secret to your `docker-compose.yml` file:
+1. Then add the secret to your `compose.yml` file:
 
     ```yaml
     ---
@@ -192,7 +192,7 @@ The following ports are exposed by this container:
 |------|----------------|
 | 8080 | Example only; nothing is actually listening on the port |
 
-The sample [Docker composition](docker-compose.yml) publishes the
+The sample [Docker composition](compose.yml) publishes the
 exposed port at 8080.
 
 ## Environment variables ##
