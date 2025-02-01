@@ -42,7 +42,7 @@ docker run cisagov/example:0.2.0
         image: cisagov/example:0.2.0
         ports:
           - protocol: tcp
-            published: 8080
+            published: "8080"
             target: 8080
         volumes:
           - source: <your_log_dir>
@@ -87,7 +87,7 @@ environment variables.  See the
         image: cisagov/example:0.2.0
         ports:
           - protocol: tcp
-            published: 8080
+            published: "8080"
             target: 8080
         secrets:
           - source: quote_txt
