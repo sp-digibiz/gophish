@@ -155,9 +155,9 @@ If you want to add or remove dependencies you would update the `src/Pipfile` fil
 and then update dependencies as you would above.
 
 > [!NOTE]
-> You should only specify packages that are explicitly needed for your Docker
-> configuration. Allow [Pipenv] to manage the dependencies of the specified
-> packages.
+> You should only specify packages that are direct requirements of
+> your Docker configuration. Allow [Pipenv] to manage the dependencies
+> of the specified packages.
 
 ## Image tags ##
 
