@@ -439,7 +439,8 @@ jobs:
           tags: ${{ needs.prepare.outputs.tags }}
           # For a list of pre-defined annotation keys and value types see:
           # https://github.com/opencontainers/image-spec/blob/master/annotations.md
-      - name: Update the Docker Hub description
+      - if: ${{ github.ref_name == 'develop' && github.event_name == 'push' }}
+        name: Update the Docker Hub description
         uses: peter-evans/dockerhub-description@v4
         with:
           description: README.md
