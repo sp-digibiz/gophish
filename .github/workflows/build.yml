@@ -441,7 +441,7 @@ jobs:
           # causing problems due to the MITM implementation hogging or
           # leaking memory.  If this happens to you just uncomment
           # this line.
-          # monitor_permissions: "false"
+          monitor_permissions: "false"
           # Use a variable to specify the permissions monitoring
           # configuration. By default this will yield the
           # configuration stored in the cisagov organization-level
