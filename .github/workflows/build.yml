@@ -10,22 +10,22 @@ on:  # yamllint disable-line rule:truthy
     branches:
       - "**"
     tags:
-      - "v*.*.*"
+      - v*.*.*
   repository_dispatch:
     # Respond to rebuild requests. See: https://github.com/cisagov/action-apb/
     types:
       - apb
   schedule:
-    - cron: "0 10 * * *"  # everyday at 10am
+    - cron: 0 10 * * *  # everyday at 10am
   workflow_dispatch:
     inputs:
       image-tag:
-        default: "dispatch"
-        description: "Tag to apply to pushed images"
+        default: dispatch
+        description: Tag to apply to pushed images
         required: true
       remote-shell:
         default: "false"
-        description: "Debug with remote shell"
+        description: Debug with remote shell
         required: true
 
 # Set a default shell for any run steps. The `-Eueo pipefail` sets errtrace,
@@ -346,12 +346,12 @@ jobs:
       - name: Cache testing environments
         uses: actions/cache@v4
         env:
-          BASE_CACHE_KEY: "${{ github.job }}-${{ runner.os }}-\
-            py${{ steps.setup-python.outputs.python-version }}-"
+          BASE_CACHE_KEY: ${{ github.job }}-${{ runner.os }}-\
+            py${{ steps.setup-python.outputs.python-version }}-
         with:
-          key: "${{ env.BASE_CACHE_KEY }}\
+          key: ${{ env.BASE_CACHE_KEY }}\
             ${{ hashFiles('**/requirements-test.txt') }}-\
-            ${{ hashFiles('**/requirements.txt') }}"
+            ${{ hashFiles('**/requirements.txt') }}
           path: ${{ env.PIP_CACHE_DIR }}
           restore-keys: |
             ${{ env.BASE_CACHE_KEY }}
