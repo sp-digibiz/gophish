@@ -37,7 +37,6 @@ defaults:
     shell: bash -Eueo pipefail -x {0}
 
 env:
-  BUILDX_CACHE_DIR: ~/.cache/buildx
   IMAGE_NAME: cisagov/example
   PIP_CACHE_DIR: ~/.cache/pip
   PRE_COMMIT_CACHE_DIR: ~/.cache/pre-commit
@@ -305,23 +304,14 @@ jobs:
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-      - name: Cache Docker layers
-        uses: actions/cache@v4
-        env:
-          BASE_CACHE_KEY: buildx-${{ runner.os }}-
-        with:
-          key: ${{ env.BASE_CACHE_KEY }}${{ github.sha }}
-          path: ${{ env.BUILDX_CACHE_DIR }}
-          restore-keys: |
-            ${{ env.BASE_CACHE_KEY }}
       - name: Create dist directory
         run: mkdir -p dist
       - name: Build image
         id: docker_build
         uses: docker/build-push-action@v6
         with:
-          cache-from: type=local,src=${{ env.BUILDX_CACHE_DIR }}
-          cache-to: type=local,dest=${{ env.BUILDX_CACHE_DIR }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           labels: ${{ needs.prepare.outputs.labels }}
           outputs: type=docker,dest=dist/image.tar
           # Uncomment the following option if you are building an image for use
@@ -471,21 +461,12 @@ jobs:
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-      - name: Cache Docker layers
-        uses: actions/cache@v4
-        env:
-          BASE_CACHE_KEY: buildx-${{ runner.os }}-
-        with:
-          key: ${{ env.BASE_CACHE_KEY }}${{ github.sha }}
-          path: ${{ env.BUILDX_CACHE_DIR }}
-          restore-keys: |
-            ${{ env.BASE_CACHE_KEY }}
       - name: Build and push platform images to registries
         id: docker_build
         uses: docker/build-push-action@v6
         with:
-          cache-from: type=local,src=${{ env.BUILDX_CACHE_DIR }}
-          cache-to: type=local,dest=${{ env.BUILDX_CACHE_DIR }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           labels: ${{ needs.prepare.outputs.labels }}
           platforms: |
             linux/amd64
