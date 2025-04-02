@@ -311,6 +311,11 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           cache-from: type=gha
+          # We use the max mode to cache all layers which includes ones from
+          # intermediate steps. This will provide us the potential for more cache hits
+          # and thus better build times. It is also the suggested setting per the
+          # documentation:
+          # https://docs.docker.com/build/ci/github-actions/cache/#cache-backend-api
           cache-to: type=gha,mode=max
           labels: ${{ needs.prepare.outputs.labels }}
           outputs: type=docker,dest=dist/image.tar
@@ -466,6 +471,11 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           cache-from: type=gha
+          # We use the max mode to cache all layers which includes ones from
+          # intermediate steps. This will provide us the potential for more cache hits
+          # and thus better build times. It is also the suggested setting per the
+          # documentation:
+          # https://docs.docker.com/build/ci/github-actions/cache/#cache-backend-api
           cache-to: type=gha,mode=max
           labels: ${{ needs.prepare.outputs.labels }}
           platforms: |
