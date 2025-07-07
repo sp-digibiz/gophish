@@ -24,7 +24,7 @@ appropriate for Docker containers and the major languages that we use.
 To run the `cisagov/example` image via Docker:
 
 ```console
-docker run cisagov/example:0.2.2
+docker run cisagov/example:0.2.2+build.1
 ```
 
 ### Running with Docker Compose ###
@@ -39,7 +39,7 @@ docker run cisagov/example:0.2.2
       example:
         environment:
           - ECHO_MESSAGE="Hello from docker compose"
-        image: cisagov/example:0.2.2
+        image: cisagov/example:0.2.2+build.1
         ports:
           - protocol: tcp
             published: "8080"
@@ -84,7 +84,7 @@ environment variables.  See the
       example:
         environment:
           - ECHO_MESSAGE="Hello from docker compose"
-        image: cisagov/example:0.2.2
+        image: cisagov/example:0.2.2+build.1
         ports:
           - protocol: tcp
             published: "8080"
@@ -125,7 +125,7 @@ environment variables.  See the
 1. Pull the new image:
 
     ```console
-    docker pull cisagov/example:0.2.2
+    docker pull cisagov/example:0.2.2+build.1
     ```
 
 1. Recreate and run the container by following the [previous instructions](#running-with-docker).
@@ -164,11 +164,11 @@ and then update dependencies as you would above.
 The images of this container are tagged with [semantic
 versions](https://semver.org) of the underlying example project that they
 containerize.  It is recommended that most users use a version tag (e.g.
-`:0.2.2`).
+`:0.2.2+build.1`).
 
 | Image:tag | Description |
 |-----------|-------------|
-|`cisagov/example:0.2.2`| An exact release version. |
+|`cisagov/example:0.2.2+build.1`| An exact release version. |
 |`cisagov/example:0.2`| The most recent release matching the major and minor version numbers. |
 |`cisagov/example:0`| The most recent release matching the major version number. |
 |`cisagov/example:edge` | The most recent image built from a merge into the `develop` branch of this repository. |
@@ -225,7 +225,7 @@ Build the image locally using this git repository as the [build context](https:/
 
 ```console
 docker build \
-  --tag cisagov/example:0.2.2 \
+  --tag cisagov/example:0.2.2+build.1 \
   https://github.com/cisagov/example.git#develop
 ```
 
@@ -256,7 +256,7 @@ Docker:
       --file Dockerfile-x \
       --platform linux/amd64 \
       --output type=docker \
-      --tag cisagov/example:0.2.2 .
+      --tag cisagov/example:0.2.2+build.1 .
     ```
 
 ## New repositories from a skeleton ##
