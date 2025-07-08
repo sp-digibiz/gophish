@@ -342,6 +342,8 @@ jobs:
           # documentation:
           # https://docs.docker.com/build/ci/github-actions/cache/#cache-backend-api
           cache-to: type=gha,mode=max
+          # For a list of pre-defined annotation keys and value types see:
+          # https://github.com/opencontainers/image-spec/blob/master/annotations.md
           labels: ${{ needs.prepare.outputs.labels }}
           outputs: type=docker,dest=dist/image.tar
           # Uncomment the following option if you are building an image for use
@@ -350,8 +352,6 @@ jobs:
           # information: https://github.com/docker/buildx/issues/1533
           # provenance: false
           tags: ${{ needs.repo-metadata.outputs.image-name }}:latest  # not to be pushed
-          # For a list of pre-defined annotation keys and value types see:
-          # https://github.com/opencontainers/image-spec/blob/master/annotations.md
       - name: Compress image
         run: gzip dist/image.tar
       - name: Upload artifacts
@@ -521,6 +521,8 @@ jobs:
           # documentation:
           # https://docs.docker.com/build/ci/github-actions/cache/#cache-backend-api
           cache-to: type=gha,mode=max
+          # For a list of pre-defined annotation keys and value types see:
+          # https://github.com/opencontainers/image-spec/blob/master/annotations.md
           labels: ${{ needs.prepare.outputs.labels }}
           platforms: ${{ join(fromJSON(needs.repo-metadata.outputs.image-platforms)) }}
           # Uncomment the following option if you are building an image for use
@@ -529,8 +531,6 @@ jobs:
           # information: https://github.com/docker/buildx/issues/1533
           # provenance: false
           tags: ${{ needs.prepare.outputs.tags }}
-          # For a list of pre-defined annotation keys and value types see:
-          # https://github.com/opencontainers/image-spec/blob/master/annotations.md
       # Now that the image layers should be available from the cache we can push to the
       # registries.
       - name: Push platform images to registries
@@ -544,6 +544,8 @@ jobs:
           # documentation:
           # https://docs.docker.com/build/ci/github-actions/cache/#cache-backend-api
           cache-to: type=gha,mode=max
+          # For a list of pre-defined annotation keys and value types see:
+          # https://github.com/opencontainers/image-spec/blob/master/annotations.md
           labels: ${{ needs.prepare.outputs.labels }}
           platforms: ${{ join(fromJSON(needs.repo-metadata.outputs.image-platforms)) }}
           # Uncomment the following option if you are building an image for use
@@ -553,8 +555,6 @@ jobs:
           # provenance: false
           push: true
           tags: ${{ needs.prepare.outputs.tags }}
-          # For a list of pre-defined annotation keys and value types see:
-          # https://github.com/opencontainers/image-spec/blob/master/annotations.md
       - name: Setup tmate debug session
         uses: mxschmitt/action-tmate@v3
         if: env.RUN_TMATE
