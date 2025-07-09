@@ -399,12 +399,12 @@ jobs:
           # monitoring configuration *does not* require you to modify
           # this workflow.
           permissions_monitoring_config: ${{ vars.ACTIONS_PERMISSIONS_CONFIG }}
-      - name: Download docker image artifact
+      - name: Download Docker image artifact
         uses: actions/download-artifact@v4
         with:
           name: dist
           path: dist
-      - name: Load docker image
+      - name: Load Docker image
         run: docker load < dist/image.tar.gz
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@0.32.0
@@ -470,12 +470,12 @@ jobs:
         run: |
           python -m pip install --upgrade pip setuptools wheel
           pip install --upgrade --requirement requirements-test.txt
-      - name: Download docker image artifact
+      - name: Download Docker image artifact
         uses: actions/download-artifact@v4
         with:
           name: dist
           path: dist
-      - name: Load docker image
+      - name: Load Docker image
         run: docker load < dist/image.tar.gz
       - name: Run tests
         env:
