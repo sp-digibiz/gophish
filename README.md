@@ -37,7 +37,7 @@ docker run cisagov/example:0.2.2+build.1
     services:
       example:
         environment:
-          - ECHO_MESSAGE="Hello from docker compose"
+          - ECHO_MESSAGE="Hello from Docker Compose"
         image: cisagov/example:0.2.2+build.1
         ports:
           - protocol: tcp
@@ -82,7 +82,7 @@ environment variables.  See the
     services:
       example:
         environment:
-          - ECHO_MESSAGE="Hello from docker compose"
+          - ECHO_MESSAGE="Hello from Docker Compose"
         image: cisagov/example:0.2.2+build.1
         ports:
           - protocol: tcp
