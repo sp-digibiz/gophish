@@ -56,6 +56,8 @@ test:
           - .isort.cfg
           - .mdl_config.yaml
           - .yamllint
+          - compose.yml
+          - pytest.ini
           - tests/**
 upstream update:
   - head-branch:
