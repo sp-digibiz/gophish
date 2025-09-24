@@ -19,6 +19,10 @@ dependencies:
           # Add any dependency files used.
           - .pre-commit-config.yaml
           - requirements*.txt
+docker:
+  - changed-files:
+      - any-glob-to-any-file:
+          - Dockerfile
 documentation:
   - changed-files:
       - any-glob-to-any-file:
