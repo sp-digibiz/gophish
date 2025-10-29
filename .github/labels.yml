@@ -71,6 +71,9 @@
 - color: d73a4a
   description: This issue or pull request addresses a security issue
   name: security
+- color: 4eaa25
+  description: Pull requests that update shell scripts
+  name: shell script
 - color: 7b42bc
   description: Pull requests that update Terraform code
   name: terraform

@@ -44,6 +44,13 @@ python:
   - changed-files:
       - any-glob-to-any-file:
           - "**/*.py"
+shell script:
+  - changed-files:
+      - any-glob-to-any-file:
+          # Add any shell scripts that do not end in the ".sh" extension.
+          - "**/*.sh"
+          - bump-version
+          - setup-env
 terraform:
   - changed-files:
       - any-glob-to-any-file:
