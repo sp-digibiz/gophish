@@ -2,7 +2,7 @@
 # Rather than breaking up descriptions into multiline strings we disable that
 # specific rule in yamllint for this file.
 # yamllint disable rule:line-length
-- color: f15a53
+- color: ff5850
   description: Pull requests that update Ansible code
   name: ansible
 - color: eb6420
