@@ -1,7 +1,6 @@
 # skeleton-generic #
 
 [![GitHub Build Status](https://github.com/cisagov/skeleton-generic/workflows/build/badge.svg)](https://github.com/cisagov/skeleton-generic/actions)
-
 [![License](https://img.shields.io/github/license/cisagov/skeleton-generic
 )](https://spdx.org/licenses/)
 
