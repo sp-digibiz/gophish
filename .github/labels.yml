@@ -62,7 +62,7 @@
 - color: 02a8ef
   description: Pull requests that update Packer code
   name: packer
-- color: 3772a4
+- color: 3776ab
   description: Pull requests that update Python code
   name: python
 - color: ef476c
