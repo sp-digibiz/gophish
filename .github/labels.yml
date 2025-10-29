@@ -47,7 +47,7 @@
 - color: fef2c0
   description: This issue or pull request is not applicable, incorrect, or obsolete
   name: invalid
-- color: f1d642
+- color: f0db4f
   description: Pull requests that update JavaScript code
   name: javascript
 - color: ce099a
