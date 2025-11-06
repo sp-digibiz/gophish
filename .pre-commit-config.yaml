@@ -144,7 +144,7 @@ repos:
           - flake8-docstrings==1.7.0
           # This is necessary to read the flake8 configuration from
           # the pyproject.toml file.
-          - flake8-pyproject
+          - flake8-pyproject==1.2.3
   - repo: https://github.com/PyCQA/isort
     rev: 6.0.1
     hooks:
