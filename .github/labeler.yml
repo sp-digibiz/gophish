@@ -53,7 +53,6 @@ test:
       - any-glob-to-any-file:
           # Add any test-related files or paths.
           - .ansible-lint
-          - .bandit.yml
           - .mdl_config.yaml
           - .yamllint
           - pyproject.toml
