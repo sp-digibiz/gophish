@@ -27,14 +27,15 @@ def main_container(dockerc):
     return dockerc.compose.ps(services=[MAIN_SERVICE_NAME], all=True)[0]
 
 
-@pytest.fixture(scope="session")
-def version_container(dockerc):
-    """Return the version container from the Docker composition.
+# There is no version service
+# @pytest.fixture(scope="session")
+# def version_container(dockerc):
+#     """Return the version container from the Docker composition.
 
-    The version container should just output the version of its underlying contents.
-    """
-    # find the container by name even if it is stopped already
-    return dockerc.compose.ps(services=[VERSION_SERVICE_NAME], all=True)[0]
+#     The version container should just output the version of its underlying contents.
+#     """
+#     # find the container by name even if it is stopped already
+#     return dockerc.compose.ps(services=[VERSION_SERVICE_NAME], all=True)[0]
 
 
 @pytest.fixture(scope="session")
