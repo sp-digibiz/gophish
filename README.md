@@ -1,8 +1,7 @@
 # gophish-docker 🎣🐳 #
 
-[![GitHub Build Status](https://github.com/cisagov/gophish-docker/workflows/build/badge.svg)](https://github.com/cisagov/gophish-docker/actions)
+[![GitHub Build Status](https://github.com/cisagov/gophish-docker/workflows/build/badge.svg)](https://github.com/cisagov/gophish-docker/actions/workflows/build.yml)
 [![CodeQL](https://github.com/cisagov/gophish-docker/workflows/CodeQL/badge.svg)](https://github.com/cisagov/gophish-docker/actions/workflows/codeql-analysis.yml)
-[![Known Vulnerabilities](https://snyk.io/test/github/cisagov/gophish-docker/badge.svg)](https://snyk.io/test/github/cisagov/gophish-docker)
 
 ## Docker Image ##
 
@@ -25,11 +24,11 @@ docker run cisagov/gophish:0.0.8
 
 ### Running with Docker Compose ###
 
-1. Create a `docker-compose.yml` file similar to the one below to use [Docker Compose](https://docs.docker.com/compose/).
+1. Create a `compose.yml` file similar to the one below to use [Docker Compose](https://docs.docker.com/compose/).
 
     ```yaml
     ---
-    version: "3.7"
+    name: skeleton-docker
 
     services:
       gophish:
@@ -65,7 +64,7 @@ environment variables.  See the
 
     ```yaml
     ---
-    version: "3.7"
+    name: skeleton-docker
 
     secrets:
       config_json:
@@ -135,6 +134,35 @@ environment variables.  See the
     ```
 
 1. Recreate and run the container by following the [previous instructions](#running-with-docker).
+
+## Updating Python dependencies ##
+
+This image uses [Pipenv] to manage Python dependencies using a [Pipfile](https://github.com/pypa/pipfile).
+Both updating dependencies and changing the [Pipenv] configuration in `src/Pipfile`
+will result in a modified `src/Pipfile.lock` file that should be committed to the
+repository.
+
+> [!WARNING]
+> The `src/Pipfile.lock` as generated will fail `pre-commit` checks due to JSON formatting.
+
+### Updating dependencies ###
+
+If you want to update existing dependencies you would run the following command
+in the `src/` subdirectory:
+
+```console
+pipenv lock
+```
+
+### Modifying dependencies ###
+
+If you want to add or remove dependencies you would update the `src/Pipfile` file
+and then update dependencies as you would above.
+
+> [!NOTE]
+> You should only specify packages that are direct requirements of
+> your Docker configuration. Allow [Pipenv] to manage the dependencies
+> of the specified packages.
 
 ## Image tags ##
 
@@ -266,3 +294,5 @@ dedication](https://creativecommons.org/publicdomain/zero/1.0/).
 All contributions to this project will be released under the CC0
 dedication. By submitting a pull request, you are agreeing to comply
 with this waiver of copyright interest.
+
+[Pipenv]: https://pypi.org/project/pipenv/

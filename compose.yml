@@ -1,5 +1,7 @@
 ---
-version: "3.7"
+# This Docker composition file is used to build and test the container
+
+name: gophish-docker
 
 secrets:
   config_json:
@@ -33,7 +35,6 @@ services:
       - target: 8080
         published: 3380
         protocol: tcp
-        mode: host
     secrets:
       - source: config_json
         target: config.json
