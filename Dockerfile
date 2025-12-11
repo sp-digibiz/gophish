@@ -80,7 +80,7 @@ COPY bin/get-api-key ${SCRIPT_DIR}
 # - https://github.com/gophish/gophish/pull/1484
 # - https://github.com/gophish/gophish/pull/1486
 # See https://github.com/cisagov/gophish-docker/issues/25 for details.
-COPY --from=compile-stage --chown=${CISA_USER}:${CISA_GROUP} ${CISA_HOME}/gophish/* ${CISA_HOME}/
+COPY --from=compile-stage --chown=${CISA_USER}:${CISA_GROUP} ${CISA_HOME}/gophish/ ${CISA_HOME}/
 RUN chmod +x ${CISA_HOME}/gophish \
     && ln --symbolic --no-dereference --force /run/secrets/config.json ${CISA_HOME}/config.json \
     && mkdir --parents ${CISA_HOME}/data \
