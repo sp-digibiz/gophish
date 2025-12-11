@@ -7,7 +7,7 @@
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/cisagov/gophish)](https://hub.docker.com/r/cisagov/gophish)
 [![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/cisagov/gophish)](https://hub.docker.com/r/cisagov/gophish)
-[![Platforms](https://img.shields.io/badge/platforms-amd64%20%7C%20arm%2Fv6%20%7C%20arm%2Fv7%20%7C%20arm64%20%7C%20ppc64le%20%7C%20s390x-blue)](https://hub.docker.com/r/cisagov/gophish/tags)
+[![Platforms](https://img.shields.io/badge/platforms-386%20%7C%20amd64%20%7C%20arm%2Fv7%20%7C%20arm64)](https://hub.docker.com/r/cisagov/gophish/tags)
 
 Creates a Docker container with an installation of the
 [gophish](https://getgophish.com) phishing framework.
