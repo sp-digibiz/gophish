@@ -26,15 +26,16 @@ services:
       dockerfile: Dockerfile
     image: cisagov/gophish
     init: true
-    restart: always
     ports:
-      - target: 3333
+      - mode: host
+        protocol: tcp
         published: 3333
+        target: 3333
+      - mode: host
         protocol: tcp
-        mode: host
-      - target: 8080
         published: 3380
-        protocol: tcp
+        target: 8080
+    restart: always
     secrets:
       - source: config_json
         target: config.json

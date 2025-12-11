@@ -34,14 +34,14 @@ docker run cisagov/gophish:0.0.8
       gophish:
         image: cisagov/gophish:0.0.8
         ports:
-          - target: 3333
+          - mode: host
+            protocol: tcp
             published: 3333
+            target: 3333
+          - mode: host
             protocol: tcp
-            mode: host
-          - target: 8080
             published: 3380
-            protocol: tcp
-            mode: host
+            target: 8080
     ```
 
 1. Start the container and detach:
@@ -82,14 +82,14 @@ environment variables.  See the
       gophish:
         image: cisagov/gophish:0.0.8
         ports:
-          - target: 3333
+          - mode: host
+            protocol: tcp
             published: 3333
+            target: 3333
+          - mode: host
             protocol: tcp
-            mode: host
-          - target: 8080
             published: 3380
-            protocol: tcp
-            mode: host
+            target: 8080
         secrets:
           - source: config_json
             target: config.json
