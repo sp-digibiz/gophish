@@ -62,7 +62,7 @@ ENV CISA_HOME="/home/${CISA_USER}"
 # Create unprivileged user
 ###
 RUN groupadd --system --gid ${CISA_GID} ${CISA_GROUP} \
-    && useradd --system --uid ${CISA_UID} --gid ${CISA_GROUP} --comment "${CISA_USER} user" $--create-home {CISA_USER}
+    && useradd --system --uid ${CISA_UID} --gid ${CISA_GROUP} --comment "${CISA_USER} user" $--create-home ${CISA_USER}
 
 ###
 # Install everything we need
