@@ -89,7 +89,7 @@ RUN chmod +x ${CISA_HOME}/gophish \
 ###
 # Clean up aptitude cruft
 ###
-RUN apt-get --quiet --quiet clean \
+RUN apt clean --quiet --quiet \
     && rm --recursive --force /var/lib/apt/lists/*
 
 ###
