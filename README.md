@@ -28,7 +28,7 @@ docker run cisagov/gophish:0.0.8
 
     ```yaml
     ---
-    name: skeleton-docker
+    name: gophish
 
     services:
       gophish:
@@ -64,7 +64,7 @@ environment variables.  See the
 
     ```yaml
     ---
-    name: skeleton-docker
+    name: gophish
 
     secrets:
       config_json:
