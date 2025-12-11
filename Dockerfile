@@ -1,5 +1,6 @@
-
-FROM debian:bullseye-slim
+# Official Docker images are in the form library/<app> while non-official
+# images are in the form <user>/<app>.
+FROM docker.io/library/debian:bullseye-slim
 
 # The version of Gophish to install
 ARG GOPHISH_VERSION="0.11.0-cisa.1"
