@@ -28,8 +28,8 @@ RUN apt install --quiet --quiet --yes \
 # - https://github.com/gophish/gophish/pull/1486
 # See https://github.com/cisagov/gophish-docker/issues/25 for details.
 RUN wget --no-verbose https://github.com/cisagov/gophish/releases/download/v${GOPHISH_VERSION}/gophish-v${GOPHISH_VERSION}-linux-64bit.zip \
-    && unzip -d ${CISA_HOME} gophish-v${GOPHISH_VERSION}-linux-64bit.zip \
-    && rm --force gophish-v${GOPHISH_VERSION}-linux-64bit.zip
+    && mkdir --parents ${CISA_HOME}/gophish \
+    && unzip -d ${CISA_HOME}/gophish gophish-v${GOPHISH_VERSION}-linux-64bit.zip
 
 # Official Docker images are in the form library/<app> while non-official
 # images are in the form <user>/<app>.
@@ -78,7 +78,7 @@ COPY bin/get-api-key ${SCRIPT_DIR}
 # - https://github.com/gophish/gophish/pull/1484
 # - https://github.com/gophish/gophish/pull/1486
 # See https://github.com/cisagov/gophish-docker/issues/25 for details.
-COPY --from=compile-stage --chown=${CISA_USER}:${CISA_GROUP} ${CISA_HOME}/gophish ${CISA_HOME}/gophish
+COPY --from=compile-stage --chown=${CISA_USER}:${CISA_GROUP} ${CISA_HOME}/gophish/* ${CISA_HOME}/
 RUN chmod +x ${CISA_HOME}/gophish \
     && ln --symbolic --no-dereference --force /run/secrets/config.json ${CISA_HOME}/config.json \
     && mkdir --parents ${CISA_HOME}/data \
