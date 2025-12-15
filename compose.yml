@@ -1,5 +1,7 @@
 ---
-version: "3.7"
+# This Docker composition file is used to build and test the container
+
+name: gophish-docker
 
 secrets:
   config_json:
@@ -19,21 +21,21 @@ services:
       # Note build arguments here are for builds using docker-compose (pytest)
       # The CI build workflow uses docker and passes the value from bump_version
       args:
-        - VERSION=0.0.8
+        - VERSION=0.1.0
       context: .
       dockerfile: Dockerfile
     image: cisagov/gophish
     init: true
-    restart: always
     ports:
-      - target: 3333
+      - mode: host
+        protocol: tcp
         published: 3333
+        target: 3333
+      - mode: host
         protocol: tcp
-        mode: host
-      - target: 8080
         published: 3380
-        protocol: tcp
-        mode: host
+        target: 8080
+    restart: always
     secrets:
       - source: config_json
         target: config.json

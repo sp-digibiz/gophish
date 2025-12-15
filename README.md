@@ -1,14 +1,13 @@
 # gophish-docker 🎣🐳 #
 
-[![GitHub Build Status](https://github.com/cisagov/gophish-docker/workflows/build/badge.svg)](https://github.com/cisagov/gophish-docker/actions)
+[![GitHub Build Status](https://github.com/cisagov/gophish-docker/workflows/build/badge.svg)](https://github.com/cisagov/gophish-docker/actions/workflows/build.yml)
 [![CodeQL](https://github.com/cisagov/gophish-docker/workflows/CodeQL/badge.svg)](https://github.com/cisagov/gophish-docker/actions/workflows/codeql-analysis.yml)
-[![Known Vulnerabilities](https://snyk.io/test/github/cisagov/gophish-docker/badge.svg)](https://snyk.io/test/github/cisagov/gophish-docker)
 
 ## Docker Image ##
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/cisagov/gophish)](https://hub.docker.com/r/cisagov/gophish)
 [![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/cisagov/gophish)](https://hub.docker.com/r/cisagov/gophish)
-[![Platforms](https://img.shields.io/badge/platforms-amd64%20%7C%20arm%2Fv6%20%7C%20arm%2Fv7%20%7C%20arm64%20%7C%20ppc64le%20%7C%20s390x-blue)](https://hub.docker.com/r/cisagov/gophish/tags)
+[![Platforms](https://img.shields.io/badge/platforms-386%20%7C%20amd64%20%7C%20arm%2Fv7%20%7C%20arm64)](https://hub.docker.com/r/cisagov/gophish/tags)
 
 Creates a Docker container with an installation of the
 [gophish](https://getgophish.com) phishing framework.
@@ -20,29 +19,29 @@ Creates a Docker container with an installation of the
 To run the `cisagov/gophish` image via Docker:
 
 ```console
-docker run cisagov/gophish:0.0.8
+docker run cisagov/gophish:0.1.0
 ```
 
 ### Running with Docker Compose ###
 
-1. Create a `docker-compose.yml` file similar to the one below to use [Docker Compose](https://docs.docker.com/compose/).
+1. Create a `compose.yml` file similar to the one below to use [Docker Compose](https://docs.docker.com/compose/).
 
     ```yaml
     ---
-    version: "3.7"
+    name: gophish
 
     services:
       gophish:
-        image: cisagov/gophish:0.0.8
+        image: cisagov/gophish:0.1.0
         ports:
-          - target: 3333
+          - mode: host
+            protocol: tcp
             published: 3333
+            target: 3333
+          - mode: host
             protocol: tcp
-            mode: host
-          - target: 8080
             published: 3380
-            protocol: tcp
-            mode: host
+            target: 8080
     ```
 
 1. Start the container and detach:
@@ -65,7 +64,7 @@ environment variables.  See the
 
     ```yaml
     ---
-    version: "3.7"
+    name: gophish
 
     secrets:
       config_json:
@@ -81,16 +80,16 @@ environment variables.  See the
 
     services:
       gophish:
-        image: cisagov/gophish:0.0.8
+        image: cisagov/gophish:0.1.0
         ports:
-          - target: 3333
+          - mode: host
+            protocol: tcp
             published: 3333
+            target: 3333
+          - mode: host
             protocol: tcp
-            mode: host
-          - target: 8080
             published: 3380
-            protocol: tcp
-            mode: host
+            target: 8080
         secrets:
           - source: config_json
             target: config.json
@@ -131,22 +130,51 @@ environment variables.  See the
 1. Pull the new image:
 
     ```console
-    docker pull cisagov/gophish:0.0.8
+    docker pull cisagov/gophish:0.1.0
     ```
 
 1. Recreate and run the container by following the [previous instructions](#running-with-docker).
+
+## Updating Python dependencies ##
+
+This image uses [Pipenv] to manage Python dependencies using a [Pipfile](https://github.com/pypa/pipfile).
+Both updating dependencies and changing the [Pipenv] configuration in `src/Pipfile`
+will result in a modified `src/Pipfile.lock` file that should be committed to the
+repository.
+
+> [!WARNING]
+> The `src/Pipfile.lock` as generated will fail `pre-commit` checks due to JSON formatting.
+
+### Updating dependencies ###
+
+If you want to update existing dependencies you would run the following command
+in the `src/` subdirectory:
+
+```console
+pipenv lock
+```
+
+### Modifying dependencies ###
+
+If you want to add or remove dependencies you would update the `src/Pipfile` file
+and then update dependencies as you would above.
+
+> [!NOTE]
+> You should only specify packages that are direct requirements of
+> your Docker configuration. Allow [Pipenv] to manage the dependencies
+> of the specified packages.
 
 ## Image tags ##
 
 The images of this container are tagged with [semantic
 versions](https://semver.org) of the underlying gophish project that they
 containerize.  It is recommended that most users use a version tag (e.g.
-`:0.0.8`).
+`:0.1.0`).
 
 | Image:tag | Description |
 |-----------|-------------|
-|`cisagov/gophish:0.0.8`| An exact release version. |
-|`cisagov/gophish:0.0`| The most recent release matching the major and minor version numbers. |
+|`cisagov/gophish:0.1.0`| An exact release version. |
+|`cisagov/gophish:0.1`| The most recent release matching the major and minor version numbers. |
 |`cisagov/gophish:0`| The most recent release matching the major version number. |
 |`cisagov/gophish:edge` | The most recent image built from a merge into the `develop` branch of this repository. |
 |`cisagov/gophish:nightly` | A nightly build of the `develop` branch of this repository. |
@@ -213,8 +241,8 @@ Build the image locally using this git repository as the [build context](https:/
 
 ```console
 docker build \
-  --build-arg VERSION=0.0.8 \
-  --tag cisagov/gophish:0.0.8 \
+  --build-arg VERSION=0.1.0 \
+  --tag cisagov/gophish:0.1.0 \
   https://github.com/cisagov/gophish-docker.git#develop
 ```
 
@@ -244,9 +272,9 @@ Docker:
     docker buildx build \
       --file Dockerfile-x \
       --platform linux/amd64 \
-      --build-arg VERSION=0.0.8 \
+      --build-arg VERSION=0.1.0 \
       --output type=docker \
-      --tag cisagov/gophish:0.0.8 .
+      --tag cisagov/gophish:0.1.0 .
     ```
 
 ## Contributing ##
@@ -266,3 +294,5 @@ dedication](https://creativecommons.org/publicdomain/zero/1.0/).
 All contributions to this project will be released under the CC0
 dedication. By submitting a pull request, you are agreeing to comply
 with this waiver of copyright interest.
+
+[Pipenv]: https://pypi.org/project/pipenv/
