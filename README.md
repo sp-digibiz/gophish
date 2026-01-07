@@ -1,6 +1,6 @@
 # gophish-docker 🎣🐳 #
 
-[![GitHub Build Status](https://github.com/cisagov/skeleton-docker/workflows/build/badge.svg)](https://github.com/cisagov/skeleton-docker/actions/workflows/build.yml)
+[![GitHub Build Status](https://github.com/cisagov/gophish-docker/workflows/build/badge.svg)](https://github.com/cisagov/gophish-docker/actions/workflows/build.yml)
 [![License](https://img.shields.io/github/license/cisagov/gophish-docker)](https://spdx.org/licenses/)
 [![CodeQL](https://github.com/cisagov/gophish-docker/workflows/CodeQL/badge.svg)](https://github.com/cisagov/gophish-docker/actions/workflows/codeql-analysis.yml)
 
