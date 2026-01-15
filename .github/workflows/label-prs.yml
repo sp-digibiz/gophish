@@ -3,10 +3,6 @@ name: Label pull requests
 
 on:  # yamllint disable-line rule:truthy
   pull_request:
-    types:
-      - edited
-      - opened
-      - synchronize
 
 # Set a default shell for any run steps. The `-Eueo pipefail` sets errtrace,
 # nounset, errexit, and pipefail. The `-x` will print all commands as they are
