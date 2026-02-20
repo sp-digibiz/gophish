@@ -138,7 +138,8 @@ will result in a modified `src/Pipfile.lock` file that should be committed to th
 repository.
 
 > [!WARNING]
-> The `src/Pipfile.lock` as generated will fail `pre-commit` checks due to JSON formatting.
+> The `src/Pipfile.lock` as generated will fail `pre-commit` checks
+> due to JSON formatting.
 
 ### Updating dependencies ###
 
