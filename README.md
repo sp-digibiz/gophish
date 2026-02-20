@@ -168,13 +168,13 @@ containerize.  It is recommended that most users use a version tag (e.g.
 `:0.2.2+build.1`).
 
 | Image:tag | Description |
-|-----------|-------------|
-|`cisagov/example:0.2.2+build.1`| An exact release version. |
-|`cisagov/example:0.2`| The most recent release matching the major and minor version numbers. |
-|`cisagov/example:0`| The most recent release matching the major version number. |
-|`cisagov/example:edge` | The most recent image built from a merge into the `develop` branch of this repository. |
-|`cisagov/example:nightly` | A nightly build of the `develop` branch of this repository. |
-|`cisagov/example:latest`| The most recent release image pushed to a container registry.  Pulling an image using the `:latest` tag [should be avoided.](https://vsupalov.com/docker-latest-tag/) |
+| --------- | ----------- |
+| `cisagov/example:0.2.2+build.1` | An exact release version. |
+| `cisagov/example:0.2` | The most recent release matching the major and minor version numbers. |
+| `cisagov/example:0` | The most recent release matching the major version number. |
+| `cisagov/example:edge` | The most recent image built from a merge into the `develop` branch of this repository. |
+| `cisagov/example:nightly` | A nightly build of the `develop` branch of this repository. |
+| `cisagov/example:latest` | The most recent release image pushed to a container registry.  Pulling an image using the `:latest` tag [should be avoided.](https://vsupalov.com/docker-latest-tag/) |
 
 See the [tags tab](https://hub.docker.com/r/cisagov/example/tags) on Docker
 Hub for a list of all the supported tags.
@@ -182,15 +182,15 @@ Hub for a list of all the supported tags.
 ## Volumes ##
 
 | Mount point | Purpose        |
-|-------------|----------------|
+| ----------- | -------------- |
 | `/var/log`  |  Log storage   |
 
 ## Ports ##
 
 The following ports are exposed by this container:
 
-| Port | Purpose        |
-|------|----------------|
+| Port | Purpose |
+| ---- | ------- |
 | 8080 | Example only; nothing is actually listening on the port |
 
 The sample [Docker composition](compose.yml) publishes the
@@ -204,20 +204,20 @@ There are no required environment variables.
 
 <!--
 | Name  | Purpose | Default |
-|-------|---------|---------|
+| ----- | ------- | ------- |
 | `REQUIRED_VARIABLE` | Describe its purpose. | `null` |
 -->
 
 ### Optional ###
 
-| Name  | Purpose | Default |
-|-------|---------|---------|
-| `ECHO_MESSAGE` | Sets the message echoed by this container.  | `Hello World from Dockerfile` |
+| Name | Purpose | Default |
+| ---- | ------- | ------- |
+| `ECHO_MESSAGE` | Sets the message echoed by this container. | `Hello World from Dockerfile` |
 
 ## Secrets ##
 
-| Filename     | Purpose |
-|--------------|---------|
+| Filename | Purpose |
+| -------- | ------- |
 | `quote.txt` | Replaces the secret stored in the example library's package data. |
 
 ## Building from source ##
