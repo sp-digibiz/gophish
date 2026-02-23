@@ -137,10 +137,6 @@ Both updating dependencies and changing the [Pipenv] configuration in `src/Pipfi
 will result in a modified `src/Pipfile.lock` file that should be committed to the
 repository.
 
-> [!WARNING]
-> The `src/Pipfile.lock` as generated will fail `pre-commit` checks
-> due to JSON formatting.
-
 ### Updating dependencies ###
 
 If you want to update existing dependencies you would run the following command
