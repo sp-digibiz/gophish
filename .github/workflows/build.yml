@@ -357,8 +357,8 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v7
         with:
-          name: dist
-          path: dist
+          archive: false
+          path: dist/image.tar.gz
       - name: Setup tmate debug session
         uses: mxschmitt/action-tmate@v3
         if: env.RUN_TMATE
@@ -402,10 +402,10 @@ jobs:
       - name: Download Docker image artifact
         uses: actions/download-artifact@v7
         with:
-          name: dist
-          path: dist
+          name: image.tar.gz
+          path: image.tar.gz
       - name: Load Docker image
-        run: docker load < dist/image.tar.gz
+        run: docker load < image.tar.gz
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@0.33.1
         with:
@@ -473,10 +473,10 @@ jobs:
       - name: Download Docker image artifact
         uses: actions/download-artifact@v7
         with:
-          name: dist
-          path: dist
+          name: image.tar.gz
+          path: image.tar.gz
       - name: Load Docker image
-        run: docker load < dist/image.tar.gz
+        run: docker load < image.tar.gz
       - name: Run tests
         env:
           RELEASE_TAG: ${{ github.event.release.tag_name }}
