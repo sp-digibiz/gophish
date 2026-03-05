@@ -403,7 +403,6 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: image.tar.gz
-          path: image.tar.gz
       - name: Load Docker image
         run: docker load < image.tar.gz
       - name: Run Trivy vulnerability scanner
@@ -474,7 +473,6 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: image.tar.gz
-          path: image.tar.gz
       - name: Load Docker image
         run: docker load < image.tar.gz
       - name: Run tests
