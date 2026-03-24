@@ -335,7 +335,7 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v4
       - name: Create dist directory
         run: mkdir -p dist
       - name: Build image
@@ -557,7 +557,7 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v4
       # We only build to ensure that the image layers are cached to push later. This is
       # because if the build takes over 10 minutes the token acquired to push to the
       # GitHub Container Registry will have expired. This results in errors like:
