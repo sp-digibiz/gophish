@@ -1,6 +1,10 @@
 # Official Docker images are in the form library/<app> while non-official
 # images are in the form <user>/<app>.
+<<<<<<< HEAD
 FROM docker.io/library/debian:bullseye-slim AS compile-stage
+=======
+FROM docker.io/library/python:3.14.3-alpine3.23 AS compile-stage
+>>>>>>> cdd0eb7c54a6982e1cac5e92cb7f61d7d74c97e0
 
 ###
 # Unprivileged user variables
@@ -8,21 +12,48 @@ FROM docker.io/library/debian:bullseye-slim AS compile-stage
 ARG CISA_USER="cisa"
 ENV CISA_HOME="/home/${CISA_USER}"
 
+<<<<<<< HEAD
 # The version of Gophish to install
 ARG GOPHISH_VERSION="0.11.0-cisa.1"
 
 ###
 # Dependencies
+=======
+# Versions of the Python packages installed directly
+ENV PYTHON_PIP_VERSION=26.0.1
+ENV PYTHON_PIPENV_VERSION=2026.0.3
+ENV PYTHON_SETUPTOOLS_VERSION=82.0.0
+
+###
+# Install the specified versions of pip and setuptools into the system
+# Python environment; install the specified version of pipenv into the system Python
+# environment; set up a Python virtual environment (venv); and install the specified
+# versions of pip and setuptools into the venv.
+>>>>>>> cdd0eb7c54a6982e1cac5e92cb7f61d7d74c97e0
 #
 # We need ca-certificates, unzip, and wget to pull down a copy of
 # gophish.
 ###
+<<<<<<< HEAD
 RUN apt update
 RUN apt install --quiet --quiet --yes \
     --no-install-recommends --no-install-suggests \
     ca-certificates \
     unzip \
     wget
+=======
+RUN python3 -m pip install --no-cache-dir --upgrade \
+        pip==${PYTHON_PIP_VERSION} \
+        setuptools==${PYTHON_SETUPTOOLS_VERSION} \
+    && python3 -m pip install --no-cache-dir --upgrade \
+        pipenv==${PYTHON_PIPENV_VERSION} \
+    # Manually create the virtual environment
+    && python3 -m venv ${VIRTUAL_ENV} \
+    # Ensure the core Python packages are installed in the virtual environment
+    && ${VIRTUAL_ENV}/bin/python3 -m pip install --no-cache-dir --upgrade \
+        pip==${PYTHON_PIP_VERSION} \
+        setuptools==${PYTHON_SETUPTOOLS_VERSION}
+>>>>>>> cdd0eb7c54a6982e1cac5e92cb7f61d7d74c97e0
 
 # TODO: Revert from cisagov/gophish back to gophish/gophish after all of our
 # pull requests have been merged; including, but potentially not limited to:
@@ -35,7 +66,11 @@ RUN wget --no-verbose https://github.com/cisagov/gophish/releases/download/v${GO
 
 # Official Docker images are in the form library/<app> while non-official
 # images are in the form <user>/<app>.
+<<<<<<< HEAD
 FROM docker.io/library/debian:bullseye-slim AS build-stage
+=======
+FROM docker.io/library/python:3.14.3-alpine3.23 AS build-stage
+>>>>>>> cdd0eb7c54a6982e1cac5e92cb7f61d7d74c97e0
 
 ###
 # For a list of pre-defined annotation keys and value types see:
