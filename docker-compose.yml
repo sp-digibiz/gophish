@@ -1,0 +1,38 @@
+services:
+  gophish:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - GOPHISH_VERSION=${GOPHISH_VERSION:-master}
+        - TRACKING_PARAM=${TRACKING_PARAM:-cid}
+    volumes:
+      - gophish-data:/opt/gophish/data
+    ports:
+      - '3333:3333'
+      - '8080:8080'
+    depends_on:
+      - smtp
+    restart: unless-stopped
+
+  smtp:
+    image: boky/postfix:latest
+    ports:
+      - '25:587'
+    volumes:
+      - smtp-dkim:/etc/opendkim/keys
+      - smtp-spool:/var/spool/postfix
+    environment:
+      - ALLOWED_SENDER_DOMAINS=${SMTP_DOMAINS}
+      - HOSTNAME=${SMTP_HOSTNAME}
+      - DKIM_AUTOGENERATE=1
+      - POSTFIX_myhostname=${SMTP_HOSTNAME}
+      - POSTFIX_message_size_limit=20480000
+      - POSTFIX_smtp_tls_security_level=may
+      - POSTFIX_smtp_tls_note_starttls_offer=yes
+    restart: unless-stopped
+
+volumes:
+  gophish-data:
+  smtp-dkim:
+  smtp-spool:
