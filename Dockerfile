@@ -45,12 +45,6 @@ RUN go build -v -o gophish
 # Stage 3: Minimal runtime
 FROM debian:bookworm-slim
 
-ARG UID=1000
-ARG GID=1000
-
-RUN groupadd -g ${GID} gophish \
-    && useradd -m -d /opt/gophish -s /bin/bash -u ${UID} -g ${GID} gophish
-
 RUN apt-get update \
     && apt-get install -y --no-install-recommends ca-certificates libsqlite3-0 \
     && apt-get clean \
@@ -59,29 +53,21 @@ RUN apt-get update \
 WORKDIR /opt/gophish
 
 # Copy binary and assets from build stages
-COPY --from=build-go --chown=gophish:gophish /go/src/github.com/gophish/gophish/gophish ./
-COPY --from=build-go --chown=gophish:gophish /go/src/github.com/gophish/gophish/db/ ./db/
-COPY --from=build-js --chown=gophish:gophish /build/static/js/dist/ ./static/js/dist/
-COPY --from=build-js --chown=gophish:gophish /build/static/css/dist/ ./static/css/dist/
-COPY --from=build-go --chown=gophish:gophish /go/src/github.com/gophish/gophish/static/images/ ./static/images/
-COPY --from=build-go --chown=gophish:gophish /go/src/github.com/gophish/gophish/static/font/ ./static/font/
-COPY --from=build-go --chown=gophish:gophish /go/src/github.com/gophish/gophish/templates/ ./templates/
+COPY --from=build-go /go/src/github.com/gophish/gophish/gophish ./
+COPY --from=build-go /go/src/github.com/gophish/gophish/db/ ./db/
+COPY --from=build-js /build/static/js/dist/ ./static/js/dist/
+COPY --from=build-js /build/static/css/dist/ ./static/css/dist/
+COPY --from=build-go /go/src/github.com/gophish/gophish/static/images/ ./static/images/
+COPY --from=build-go /go/src/github.com/gophish/gophish/static/font/ ./static/font/
+COPY --from=build-go /go/src/github.com/gophish/gophish/templates/ ./templates/
 
 # Copy config
-COPY --chown=gophish:gophish config/config.json ./config.json
+COPY config/config.json ./config.json
 
 # Persistent data directory for SQLite
-RUN mkdir -p /opt/gophish/data && chown gophish:gophish /opt/gophish/data
+RUN mkdir -p /opt/gophish/data
 VOLUME /opt/gophish/data
-
-# Entrypoint fixes volume ownership (bind/named volumes mount as root:root by
-# default on Docker) then drops to the unprivileged gophish user.
-RUN apt-get update && apt-get install -y --no-install-recommends gosu \
-    && rm -rf /var/lib/apt/lists/*
-
-COPY --chmod=0755 docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
 EXPOSE 3333 8080
 
-ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
-CMD ["./gophish"]
+ENTRYPOINT ["./gophish"]
