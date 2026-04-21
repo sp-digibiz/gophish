@@ -8,9 +8,9 @@ services:
         - TRACKING_PARAM=${TRACKING_PARAM:-cid}
     volumes:
       - gophish-data:/opt/gophish/data
-    ports:
-      - '3333:3333'
-      - '8080:8080'
+    expose:
+      - '3333'
+      - '8080'
     depends_on:
       - smtp
     restart: unless-stopped
