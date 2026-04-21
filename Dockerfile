@@ -74,8 +74,14 @@ COPY --chown=gophish:gophish config/config.json ./config.json
 RUN mkdir -p /opt/gophish/data && chown gophish:gophish /opt/gophish/data
 VOLUME /opt/gophish/data
 
-USER gophish
+# Entrypoint fixes volume ownership (bind/named volumes mount as root:root by
+# default on Docker) then drops to the unprivileged gophish user.
+RUN apt-get update && apt-get install -y --no-install-recommends gosu \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY --chmod=0755 docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
 EXPOSE 3333 8080
 
-ENTRYPOINT ["./gophish"]
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
+CMD ["./gophish"]
