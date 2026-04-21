@@ -65,7 +65,6 @@ COPY --from=build-js --chown=gophish:gophish /build/static/js/dist/ ./static/js/
 COPY --from=build-js --chown=gophish:gophish /build/static/css/dist/ ./static/css/dist/
 COPY --from=build-go --chown=gophish:gophish /go/src/github.com/gophish/gophish/static/images/ ./static/images/
 COPY --from=build-go --chown=gophish:gophish /go/src/github.com/gophish/gophish/static/font/ ./static/font/
-COPY --from=build-go --chown=gophish:gophish /go/src/github.com/gophish/gophish/static/favicon.ico ./static/favicon.ico
 COPY --from=build-go --chown=gophish:gophish /go/src/github.com/gophish/gophish/templates/ ./templates/
 
 # Copy config
