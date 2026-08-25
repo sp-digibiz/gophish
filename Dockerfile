@@ -54,6 +54,8 @@ WORKDIR /opt/gophish
 
 # Copy binary and assets from build stages
 COPY --from=build-go /go/src/github.com/gophish/gophish/gophish ./
+# gophish reads ./VERSION at startup and log.Fatal()s if it is missing
+COPY --from=build-go /go/src/github.com/gophish/gophish/VERSION ./
 COPY --from=build-go /go/src/github.com/gophish/gophish/db/ ./db/
 COPY --from=build-js /build/static/js/dist/ ./static/js/dist/
 COPY --from=build-js /build/static/css/dist/ ./static/css/dist/
