@@ -6,6 +6,9 @@ services:
       args:
         - GOPHISH_VERSION=${GOPHISH_VERSION:-master}
         - TRACKING_PARAM=${TRACKING_PARAM:-cid}
+    # TEMP DIAGNOSTIC: capture gophish startup output and keep the container
+    # alive after it exits so the crash reason is retrievable via logs.
+    entrypoint: ["/bin/sh", "-c", "echo '=== gophish diagnostic start ==='; ./gophish 2>&1; echo \"=== gophish exited with code $$? ===\"; sleep 3600"]
     volumes:
       - gophish-data:/opt/gophish/data
     expose:
