@@ -57,10 +57,10 @@ COPY --from=build-go /go/src/github.com/gophish/gophish/gophish ./
 # gophish reads ./VERSION at startup and log.Fatal()s if it is missing
 COPY --from=build-go /go/src/github.com/gophish/gophish/VERSION ./
 COPY --from=build-go /go/src/github.com/gophish/gophish/db/ ./db/
-COPY --from=build-js /build/static/js/dist/ ./static/js/dist/
-COPY --from=build-js /build/static/css/dist/ ./static/css/dist/
-COPY --from=build-go /go/src/github.com/gophish/gophish/static/images/ ./static/images/
-COPY --from=build-go /go/src/github.com/gophish/gophish/static/font/ ./static/font/
+# Copy the full static directory — templates reference files from both dist/
+# (minified app bundles) and src/vendor (e.g. ckeditor.js), so a partial copy
+# breaks page init and silently kills the Save button
+COPY --from=build-go /go/src/github.com/gophish/gophish/static/ ./static/
 COPY --from=build-go /go/src/github.com/gophish/gophish/templates/ ./templates/
 
 # Copy config
