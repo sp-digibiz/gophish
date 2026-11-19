@@ -11,6 +11,8 @@ Operational runbooks for phishing awareness campaigns.
 | [Sending Profile Setup](sending-profile-setup.md) | Configuring GoPhish to send via the SMTP sidecar |
 | [IP Warming](ip-warming.md) | Before first campaign on a new or cold IP |
 | [Pre-Campaign Checklist](pre-campaign-checklist.md) | Before launching any campaign |
+| [Admin Hardening](admin-hardening.md) | Lock down the admin UI: HTTPS, IP allowlist, basic auth, hostname |
+| [Dedicated IP](dedicated-ip.md) | Move the phishing stack off the shared app-platform IP |
 | [Troubleshooting](troubleshooting.md) | Emails not delivering, landing in spam, bounces, etc. |
 
 ## Quick Reference

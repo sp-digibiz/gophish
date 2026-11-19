@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        - GOPHISH_VERSION=${GOPHISH_VERSION:-master}
+        - GOPHISH_VERSION=${GOPHISH_VERSION:-95618469799295e2c0fec980805a2dfbb818816b}
         - TRACKING_PARAM=${TRACKING_PARAM:-cid}
     volumes:
       - gophish-data:/opt/gophish/data
