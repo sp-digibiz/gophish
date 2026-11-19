@@ -13,6 +13,20 @@ In Coolify beim Service unter **Domains** die Admin-Domain von `http://…` auf
 `https://…` setzen. Coolify legt dann ein Let's-Encrypt-Zertifikat an und leitet
 HTTP auf HTTPS um.
 
+**Wichtig: HTTPS schaltet den CSRF-Referer-Check scharf.** Hinter Traefik sieht
+GoPhish den Header `X-Forwarded-Proto: https` und prüft bei jedem Login die
+Herkunft. Fehlt der Admin-Host in `trusted_origins`, lehnt GoPhish jeden Login ab
+mit `Forbidden - referer invalid`. Dann kommt niemand mehr rein.
+
+Darum in `config/config.json` unter `admin_server` den Admin-Host eintragen:
+
+```json
+"trusted_origins": ["mgmt-1ogbol.app.spdigi.biz"]
+```
+
+Nur der Hostname, ohne Scheme und ohne Port. Ändert sich der Admin-Host, diesen
+Eintrag mitändern, sonst ist der Login wieder tot.
+
 ## 2. Zugang auf bekannte IPs beschränken
 
 Der Admin wird nur aus dem Büro oder per VPN bedient. Sperre alles andere mit
