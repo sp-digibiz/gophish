@@ -1,7 +1,7 @@
 # Stage 1: Minify client-side assets
 FROM node:20-slim AS build-js
 
-ARG GOPHISH_VERSION=master
+ARG GOPHISH_VERSION=95618469799295e2c0fec980805a2dfbb818816b
 
 RUN apt-get update && apt-get install -y --no-install-recommends git ca-certificates \
     && rm -rf /var/lib/apt/lists/*
@@ -38,6 +38,20 @@ RUN sed -i "s/const RecipientParameter = \"rid\"/const RecipientParameter = \"${
 
 # Custom 404 page (overwrite default)
 COPY config/404.html templates/404.html
+
+# Anti-fingerprinting: strip "Gophish" branding from the admin UI templates.
+# These pages are served only on the admin port, but a locked-down admin should
+# still not announce the product in its <title>, meta tags, or navbar.
+RUN set -e; for f in templates/*.html; do \
+      sed -i \
+        -e 's#<title>Gophish - {{ .Title }}</title>#<title>{{ .Title }}</title>#g' \
+        -e 's#<title>{{ .Title }} - Gophish</title>#<title>{{ .Title }}</title>#g' \
+        -e 's#Gophish - Open-Source Phishing Toolkit#Portal#g' \
+        -e 's#Gophish - Phishing Toolkit#Portal#g' \
+        -e 's#<meta name="author" content="Jordan Wright (http://github.com/jordan-wright)">##g' \
+        -e 's#&nbsp;gophish##g' \
+        "$f"; \
+    done
 
 RUN go build -v -o gophish
 

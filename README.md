@@ -46,6 +46,7 @@ Modifications applied during the Docker build:
 - Server name `"gophish"` replaced with `"IGNORE"`
 - Tracking parameter `rid` renamed to `cid` (configurable via `TRACKING_PARAM` build arg)
 - Custom 404 page with no GoPhish fingerprint
+- `Gophish` branding stripped from the admin UI templates (title, meta, navbar)
 
 ## Configuration
 
@@ -56,7 +57,7 @@ Environment variables in `.env` (see `.env.example`):
 | `GOPHISH_ADMIN_PASSWORD` | Initial admin password | -- (required) |
 | `SMTP_HOSTNAME` | FQDN for the postfix container (used in HELO/EHLO and reverse DNS) | -- (required) |
 | `SMTP_DOMAINS` | Comma-separated list of domains allowed to send (triggers DKIM key generation) | -- (required) |
-| `GOPHISH_VERSION` | Git branch/tag to build GoPhish from | `master` |
+| `GOPHISH_VERSION` | Git branch, tag, or **commit SHA** to build GoPhish from. Pinned to a commit for reproducible builds. | `9561846` |
 | `TRACKING_PARAM` | URL parameter name for recipient tracking | `cid` |
 
 ## Data Persistence
